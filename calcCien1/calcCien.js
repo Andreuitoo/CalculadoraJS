@@ -37,8 +37,20 @@ function Display (displayValorActual, displayValorAnterior) {
         multiplicar: "x",
         restar: "-",
         potencia: "^",
+        raizCuadrada: "√",
+        coseno: "cos"
     };
 }
+
+Display.prototype.parsearValorActual = function () {
+    this.valorActual = parseFloat(this.valorActual);
+    return this.valorActual;
+};
+
+Display.prototype.parsearValorAnterior = function () {
+    this.valorAnterior = parseFloat(this.valorAnterior);
+    return this.valorAnterior;
+};
 
 Display.prototype.borrar = function () {
     this.valorActual = this.valorActual.toString().slice(0, -1);
@@ -80,8 +92,8 @@ Display.prototype.pushArray = function () {
 }
 
 Display.prototype.calcular = function () {
-    var valorAnterior = parseFloat(this.valorAnterior);
-    var valorActual = parseFloat(this.valorActual);
+    var valorAnterior = this.parsearValorAnterior();
+    var valorActual = this.parsearValorActual();
 
     if (isNaN(valorActual) || isNaN(valorAnterior)) return;
     this.valorActual = calculador[this.tipoOperacion](
@@ -93,7 +105,29 @@ Display.prototype.calcular = function () {
 
 Display.prototype.actualizarHistorial = function () {
     var respuestaAnterior = document.getElementById("respuesta-anterior");
-    respuestaAnterior.innerHTML = historial.join("");
+    respuestaAnterior.innerHTML = historial.join(", ");
+}
+
+Display.prototype.raizCuadrada = function () {
+    var valorActual = parseFloat(this.valorActual);
+    if (isNaN(valorActual)) return;
+    this.valorActual = calculador.raizCuadrada(valorActual);
+    this.pushArray();
+}
+
+Display.prototype.potencia = function () {
+    var valorAnterior = parseFloat(this.valorAnterior);
+    var valorActual = parseFloat(this.valorActual);
+    if (isNaN(valorActual) || isNaN(valorAnterior)) return;
+    this.valorActual = calculador.potencia(valorAnterior, valorActual);
+    this.pushArray();
+}
+
+Display.prototype.coseno = function () {
+    var valorActual = parseFloat(this.valorActual);
+    if (isNaN(valorActual)) return;
+    this.valorActual = Math.cos(valorActual);
+    this.pushArray();
 }
 
 var displayValorAnterior = document.getElementById("valor-anterior");

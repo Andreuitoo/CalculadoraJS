@@ -14,13 +14,18 @@
 <body>
   <main>
     <div class="container">
+      <h1>Calculadora Científica en potencia</h1>
       <div class="calculadora">
         <div class="display">
           <div id="valor-anterior"></div>
           <div id="valor-actual"></div>
         </div>
-        <button class="col-2" onclick="display.borrarTodo()">C</button>
-        <button onclick="display.borrar()">&larr;</button>
+        <button class="operador" value="coseno">cos</button>
+        <button class="operador" value="seno">sen</button>
+        <button class="operador" value="tangente">tan</button>
+        <button class="operador" value="arcotangente">atan</button>
+        <button id="diffColor" class="col-2" onclick="display.borrarTodo()">C</button>
+        <button id="diffColor" onclick="display.borrar()">&larr;</button>
         <button class="operador" value="dividir">%</button>
         <button class="numero">7</button>
         <button class="numero">8</button>
