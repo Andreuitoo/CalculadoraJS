@@ -28,6 +28,7 @@ class Calculadora {
 function Display (displayValorActual, displayValorAnterior) {
     this.displayValorActual = displayValorActual;
     this.displayValorAnterior = displayValorAnterior;
+    this.calculador = new Calculadora();
     this.tipoOperacion = undefined;
     this.valorActual = "";
     this.valorAnterior = "";
@@ -38,7 +39,10 @@ function Display (displayValorActual, displayValorAnterior) {
         restar: "-",
         potencia: "^",
         raizCuadrada: "√",
-        coseno: "cos"
+        coseno: "cos",
+        seno: "sen",
+        tangente: "tan",
+        logaritmo: "log",
     };
 }
 
@@ -65,7 +69,7 @@ Display.prototype.borrarTodo = function () {
 };
 
 Display.prototype.computar = function (tipo) {
-    if (this.tipoOperacion !== undefined) {
+    if (this.tipoOperacion !== "igual") {
         this.calcular();
     }
     this.tipoOperacion = tipo;
@@ -96,7 +100,7 @@ Display.prototype.calcular = function () {
     var valorActual = this.parsearValorActual();
 
     if (isNaN(valorActual) || isNaN(valorAnterior)) return;
-    this.valorActual = calculador[this.tipoOperacion](
+    this.valorActual = this.calculador[this.tipoOperacion](
         valorAnterior,
         valorActual
     );
@@ -108,28 +112,6 @@ Display.prototype.actualizarHistorial = function () {
     respuestaAnterior.innerHTML = historial.join(", ");
 }
 
-Display.prototype.raizCuadrada = function () {
-    var valorActual = parseFloat(this.valorActual);
-    if (isNaN(valorActual)) return;
-    this.valorActual = calculador.raizCuadrada(valorActual);
-    this.pushArray();
-}
-
-Display.prototype.potencia = function () {
-    var valorAnterior = parseFloat(this.valorAnterior);
-    var valorActual = parseFloat(this.valorActual);
-    if (isNaN(valorActual) || isNaN(valorAnterior)) return;
-    this.valorActual = calculador.potencia(valorAnterior, valorActual);
-    this.pushArray();
-}
-
-Display.prototype.coseno = function () {
-    var valorActual = parseFloat(this.valorActual);
-    if (isNaN(valorActual)) return;
-    this.valorActual = Math.cos(valorActual);
-    this.pushArray();
-}
-
 var displayValorAnterior = document.getElementById("valor-anterior");
 var displayValorActual = document.getElementById("valor-actual");
 var botonesNumeros = document.querySelectorAll('.numero');
@@ -137,8 +119,6 @@ var botonesOperadores = document.querySelectorAll('.operador');
 var historial = [];
 
 var display = new Display(displayValorActual, displayValorAnterior);
-
-var calculador = new Calculadora();
 
 botonesNumeros.forEach(function (boton) {
     boton.addEventListener('click', function () {;
