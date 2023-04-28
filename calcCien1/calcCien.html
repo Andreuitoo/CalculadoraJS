@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Author" content="Andreu Sadurní Salleras" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces&display=swap" rel="stylesheet">
+  <link href="calcCien.css" rel="stylesheet" />
+  <script src="calcCien.js" type="text/javascript" defer></script>
+  <title>Calculadora Científica</title>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <h1>Calculadora Científica en potencia</h1>
+      <div class="calculadora">
+        <div class="display">
+          <div id="valor-anterior"></div>
+          <div id="valor-actual"></div>
+        </div>
+        <button class="operador" value="coseno">cos</button>
+        <button class="operador" value="seno">sen</button>
+        <button class="operador" value="tangente">tan</button>
+        <button class="operador" value="logaritmo">log</button>
+        <button id="diffColor" class="col-2" onclick="display.borrarTodo()">C</button>
+        <button id="diffColor" onclick="display.borrar()">&larr;</button>
+        <button class="operador" value="dividir">%</button>
+        <button class="numero">7</button>
+        <button class="numero">8</button>
+        <button class="numero">9</button>
+        <button class="operador" value="multiplicar">X</button>
+        <button class="numero">4</button>
+        <button class="numero">5</button>
+        <button class="numero">6</button>
+        <button class="operador" value="restar">-</button>
+        <button class="numero">1</button>
+        <button class="numero">2</button>
+        <button class="numero">3</button>
+        <button class="operador" value="sumar">+</button>
+        <button class="numero">.</button>
+        <button class="col-2 numero">0</button>
+        <button class="operador" value="igual">=</button>
+      </div>
+    </div>
+    <div class="historial">
+      <h3>historial</h3>
+      <div id="respuesta-anterior"></div>
+    </div>
+  </main>
+</body>
+
+</html>
